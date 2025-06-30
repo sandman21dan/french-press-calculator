@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>French Press Calculator</title>
+    <style>
+        body {
+            background-color: #F5F5DC;
+            font-family: 'Courier New', Courier, monospace;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+        h1 {
+            font-weight: bold;
+            text-align: center;
+        }
+        .calculator {
+            margin-bottom: 20px;
+        }
+        .slider-container {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #ddd;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            background: #333;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: #333;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            background: #333;
+            cursor: pointer;
+        }
+        .result {
+            text-align: center;
+        }
+        .coffee-amount {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        .water-amount {
+            font-size: 1em;
+        }
+        details {
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        .credits {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>French Press Calculator</h1>
+        <div class="calculator">
+            <div class="slider-container">
+                <label for="strength">Strength: <span id="strengthValue">65</span> g/l</label>
+                <input type="range" id="strength" min="60" max="70" value="65">
+            </div>
+            <div class="slider-container">
+                <label for="volume">Desired ml of Coffee: <span id="volumeValue">500</span> ml</label>
+                <input type="range" id="volume" min="100" max="1000" value="500" step="10">
+            </div>
+        </div>
+        <div class="result">
+            <p class="coffee-amount"><span id="coffee-output">32.5</span>g of coffee</p>
+            <p class="water-amount">requires <span id="water-output">500</span>ml of water</p>
+        </div>
+
+        <details>
+            <summary>Technique</summary>
+            <ul>
+                <li><strong>Grind your coffee:</strong> 60-70 grams of coffee per liter of water. Grind fresh for the best experience. Aim for a medium grind, not too coarse.</li>
+                <li><strong>Use good water:</strong> Fresh, clean, and soft water is recommended.</li>
+                <li><strong>Use a digital scale:</strong> For consistency and adjustments.</li>
+                <li><strong>Brew the coffee:</strong>
+                    <ul>
+                        <li>Boil water and pour over the grounds.</li>
+                        <li>Let it sit for four minutes.</li>
+                        <li>Stir the crust and scoop off foam and floating bits.</li>
+                        <li>Let it sit for at least five more minutes for better taste.</li>
+                    </ul>
+                </li>
+                <li><strong>Serve the coffee:</strong>
+                    <ul>
+                        <li>Push the plunger down gently to rest on the coffee surface.</li>
+                        <li>Pour gently into your cup.</li>
+                    </ul>
+                </li>
+            </ul>
+        </details>
+
+        <div class="credits">
+            <p>Recipe and technique from <a href="https://www.youtube.com/watch?v=st571DYYTR8" target="_blank">James Hoffman's YouTube video</a>.</p>
+        </div>
+    </div>
+
+    <script>
+        const strengthSlider = document.getElementById('strength');
+        const volumeSlider = document.getElementById('volume');
+        const strengthValue = document.getElementById('strengthValue');
+        const volumeValue = document.getElementById('volumeValue');
+        const coffeeOutput = document.getElementById('coffee-output');
+        const waterOutput = document.getElementById('water-output');
+
+        function calculate() {
+            const strength = strengthSlider.value;
+            const volume = volumeSlider.value;
+
+            strengthValue.textContent = strength;
+            volumeValue.textContent = volume;
+
+            const coffeeGrams = (strength * volume) / 1000;
+            coffeeOutput.textContent = coffeeGrams.toFixed(1) + 'g of coffee';
+            waterOutput.textContent = 'requires ' + volume + 'ml of water';
+        }
+
+        strengthSlider.addEventListener('input', calculate);
+        volumeSlider.addEventListener('input', calculate);
+
+        // Initial calculation
+        calculate();
+    </script>
+</body>
+</html>
