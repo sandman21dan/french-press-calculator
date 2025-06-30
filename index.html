@@ -44,7 +44,7 @@
             margin-bottom: var(--spacing-large);
         }
         .slider-container {
-            margin-bottom: var(--spacing-small);
+            margin-bottom: var(--spacing-medium);
         }
         label {
             display: block;
@@ -116,16 +116,16 @@
         <h1>French Press Calculator</h1>
         <div class="calculator">
             <div class="slider-container">
-                <label for="strength">Strength: <span id="strengthValue">65</span> g/l</label>
+                <label for="strength">Strength: <span id="strengthValue">65</span>g</label>
                 <input type="range" id="strength" min="60" max="70" value="65">
             </div>
             <div class="slider-container">
-                <label for="volume">Desired ml of Coffee: <span id="volumeValue">500</span> ml</label>
+                <label for="volume">Desired quantity: <span id="volumeValue">500</span> ml</label>
                 <input type="range" id="volume" min="100" max="1000" value="500" step="10">
             </div>
         </div>
         <div class="result">
-            <p class="coffee-amount" id="coffee-output">32.5g of coffee</p>
+            <p class="coffee-amount" id="coffee-output">32.5g of ground coffee</p>
             <p class="water-amount" id="water-output">requires 500ml of water</p>
         </div>
 
@@ -173,15 +173,40 @@
             volumeValue.textContent = volume;
 
             const coffeeGrams = (strength * volume) / 1000;
-            coffeeOutput.textContent = coffeeGrams.toFixed(1) + 'g of coffee';
+            coffeeOutput.textContent = coffeeGrams.toFixed(1) + 'g of ground coffee';
             waterOutput.textContent = 'requires ' + volume + 'ml of water';
         }
 
-        strengthSlider.addEventListener('input', calculate);
-        volumeSlider.addEventListener('input', calculate);
+        function saveSettings() {
+            const settings = {
+                strength: strengthSlider.value,
+                volume: volumeSlider.value
+            };
+            localStorage.setItem('frenchPressSettings', JSON.stringify(settings));
+        }
 
-        // Initial calculation
-        calculate();
+        function loadSettings() {
+            const savedSettings = localStorage.getItem('frenchPressSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                strengthSlider.value = settings.strength || 65;
+                volumeSlider.value = settings.volume || 500;
+            }
+        }
+
+        strengthSlider.addEventListener('input', () => {
+            calculate();
+            saveSettings();
+        });
+
+        volumeSlider.addEventListener('input', () => {
+            calculate();
+            saveSettings();
+        });
+
+        // On page load:
+        loadSettings(); // Set sliders to saved values
+        calculate();    // Update display based on slider values
     </script>
 </body>
 </html>
