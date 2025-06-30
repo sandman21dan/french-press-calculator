@@ -52,9 +52,15 @@
             margin-bottom: var(--spacing-large);
         }
         label {
-            display: block;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
             margin-bottom: var(--label-margin-bottom);
             font-weight: bold;
+        }
+        .label-description {
+            font-weight: normal;
+            font-size: 0.9em;
         }
         input[type="range"] {
             -webkit-appearance: none;
@@ -121,11 +127,17 @@
         <h1>French Press Calculator</h1>
         <div class="calculator">
             <div class="slider-container">
-                <label for="strength">Strength: <span id="strengthValue">65</span>g</label>
+                <label for="strength">
+                    <span>Strength: <span id="strengthValue">65</span>g</span>
+                    <span class="label-description">Ground coffee per litre</span>
+                </label>
                 <input type="range" id="strength" min="60" max="70" value="65">
             </div>
             <div class="slider-container">
-                <label for="volume">Desired quantity: <span id="volumeValue">500</span> ml</label>
+                <label for="volume">
+                    <span>Desired quantity: <span id="volumeValue">500</span> ml</span>
+                    <span class="label-description">of coffee extraction</span>
+                </label>
                 <input type="range" id="volume" min="100" max="1000" value="500" step="10">
             </div>
             <div class="result">
