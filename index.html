@@ -116,14 +116,95 @@
         .credits {
             text-align: center;
             margin-top: var(--credits-margin-top);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
+        .credits p {
+            margin: 0;
+        }
+
+        .youtube-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
         a {
             color: var(--link-color);
+        }
+
+        .info-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--slider-bar-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1.2em;
+            color: var(--slider-bar-color);
+        }
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--background-color);
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+            position: relative;
+            border-radius: 8px;
+        }
+
+        .modal-content p {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="info-button" id="infoButton">?</div>
         <h1>French Press Calculator</h1>
         <div class="calculator">
             <div class="slider-container">
@@ -171,8 +252,24 @@
             </details>
 
             <div class="credits">
-                <p>Recipe and technique from <a href="https://www.youtube.com/watch?v=st571DYYTR8" target="_blank">James Hoffman's YouTube video</a>.</p>
+                <p>
+                    <svg class="youtube-icon" viewBox="0 0 28 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27.4274 3.1214C27.1204 1.8934 26.1364 0.908401 24.9084 0.602401C22.7344 0.000400543 14.0004 0.000400543 14.0004 0.000400543C14.0004 0.000400543 5.2664 0.000400543 3.0924 0.602401C1.8644 0.908401 0.880401 1.8934 0.573401 3.1214C-0.000599457 5.3504 -0.000599457 10.0004 -0.000599457 10.0004C-0.000599457 10.0004 -0.000599457 14.6504 0.573401 16.8794C0.880401 18.1074 1.8644 19.0924 3.0924 19.3984C5.2664 20.0004 14.0004 20.0004 14.0004 20.0004C14.0004 20.0004 22.7344 20.0004 24.9084 19.3984C26.1364 19.0924 27.1204 18.1074 27.4274 16.8794C28.0004 14.6504 28.0004 10.0004 28.0004 10.0004C28.0004 10.0004 28.0004 5.3504 27.4274 3.1214Z" fill="#FF0000"/>
+                        <path d="M11.1992 14.2857L18.4842 10L11.1992 5.71429V14.2857Z" fill="white"/>
+                    </svg>
+                    Recipe and technique from <a href="https://www.youtube.com/watch?v=st571DYYTR8" target="_blank">James Hoffman's YouTube video</a>.
+                </p>
             </div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>About This Calculator</h2>
+            <p>This French Press Calculator is designed to help you brew the perfect cup of coffee using James Hoffmann's recommended french press technique.</p>
+            <p>Simply adjust the sliders for your desired strength within the recipe and volume, and the calculator will tell you exactly how much ground coffee and water you need.</p>
+            <p>It saves your last used settings  for convenience, and provides a quick reference for the brewing technique.</p>
         </div>
     </div>
 
@@ -183,6 +280,10 @@
         const volumeValue = document.getElementById('volumeValue');
         const coffeeOutput = document.getElementById('coffee-output');
         const waterOutput = document.getElementById('water-output');
+
+        const infoButton = document.getElementById('infoButton');
+        const infoModal = document.getElementById('infoModal');
+        const closeButton = document.querySelector('.close-button');
 
         function calculate() {
             const strength = strengthSlider.value;
@@ -213,6 +314,7 @@
             }
         }
 
+        // Event Listeners for sliders
         strengthSlider.addEventListener('input', () => {
             calculate();
             saveSettings();
@@ -221,6 +323,21 @@
         volumeSlider.addEventListener('input', () => {
             calculate();
             saveSettings();
+        });
+
+        // Event Listeners for modal
+        infoButton.addEventListener('click', () => {
+            infoModal.style.display = 'flex';
+        });
+
+        closeButton.addEventListener('click', () => {
+            infoModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target == infoModal) {
+                infoModal.style.display = 'none';
+            }
         });
 
         // On page load:
