@@ -34,6 +34,11 @@
         .container {
             max-width: 600px;
             padding: var(--container-padding);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
+            box-sizing: border-box;
         }
         h1 {
             font-weight: bold;
@@ -44,7 +49,7 @@
             margin-bottom: var(--spacing-large);
         }
         .slider-container {
-            margin-bottom: var(--spacing-medium);
+            margin-bottom: var(--spacing-large);
         }
         label {
             display: block;
@@ -79,7 +84,7 @@
         }
         .result {
             text-align: center;
-            margin-bottom: var(--spacing-large);
+            margin-top: calc(var(--spacing-large) * 2);
         }
         .coffee-amount {
             font-size: 2em;
@@ -123,37 +128,39 @@
                 <label for="volume">Desired quantity: <span id="volumeValue">500</span> ml</label>
                 <input type="range" id="volume" min="100" max="1000" value="500" step="10">
             </div>
-        </div>
-        <div class="result">
-            <p class="coffee-amount" id="coffee-output">32.5g of ground coffee</p>
-            <p class="water-amount" id="water-output">requires 500ml of water</p>
+            <div class="result">
+                <p class="coffee-amount" id="coffee-output">32.5g of ground coffee</p>
+                <p class="water-amount" id="water-output">requires 500ml of water</p>
+            </div>
         </div>
 
-        <details>
-            <summary>Technique</summary>
-            <ul>
-                <li><strong>Grind your coffee:</strong> 60-70 grams of coffee per liter of water. Grind fresh for the best experience. Aim for a medium grind, not too coarse.</li>
-                <li><strong>Use good water:</strong> Fresh, clean, and soft water is recommended.</li>
-                <li><strong>Use a digital scale:</strong> For consistency and adjustments.</li>
-                <li><strong>Brew the coffee:</strong>
-                    <ul>
-                        <li>Boil water and pour over the grounds.</li>
-                        <li>Let it sit for four minutes.</li>
-                        <li>Stir the crust and scoop off foam and floating bits.</li>
-                        <li>Let it sit for at least five more minutes for better taste.</li>
-                    </ul>
-                </li>
-                <li><strong>Serve the coffee:</strong>
-                    <ul>
-                        <li>Push the plunger down gently to rest on the coffee surface.</li>
-                        <li>Pour gently into your cup.</li>
-                    </ul>
-                </li>
-            </ul>
-        </details>
+        <div class="footer-group">
+            <details>
+                <summary>Technique</summary>
+                <ul>
+                    <li><strong>Grind your coffee:</strong> 60-70 grams of coffee per liter of water. Grind fresh for the best experience. Aim for a medium grind, not too coarse.</li>
+                    <li><strong>Use good water:</strong> Fresh, clean, and soft water is recommended.</li>
+                    <li><strong>Use a digital scale:</strong> For consistency and adjustments.</li>
+                    <li><strong>Brew the coffee:</strong>
+                        <ul>
+                            <li>Boil water and pour over the grounds.</li>
+                            <li>Let it sit for four minutes.</li>
+                            <li>Stir the crust and scoop off foam and floating bits.</li>
+                            <li>Let it sit for at least five more minutes for better taste.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Serve the coffee:</strong>
+                        <ul>
+                            <li>Push the plunger down gently to rest on the coffee surface.</li>
+                            <li>Pour gently into your cup.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </details>
 
-        <div class="credits">
-            <p>Recipe and technique from <a href="https://www.youtube.com/watch?v=st571DYYTR8" target="_blank">James Hoffman's YouTube video</a>.</p>
+            <div class="credits">
+                <p>Recipe and technique from <a href="https://www.youtube.com/watch?v=st571DYYTR8" target="_blank">James Hoffman's YouTube video</a>.</p>
+            </div>
         </div>
     </div>
 
