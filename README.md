@@ -1,6 +1,6 @@
 # French Press Calculator
 
-[Live Demo](https://sandman21dan.github.io/french-press-calculator)
+[Website](https://coffee.danielperez.co.uk)
 
 This is a simple, interactive web-based calculator for making coffee with a French press, following the popular recipe by James Hoffmann.
 
