@@ -14,8 +14,8 @@
         :root {
             --background-color: #F5F5DC;
             --text-color: #333;
-            --slider-bar-color: #333;
-            --slider-thumb-color: #111;
+            --slider-bar-color: #511e04;
+            --slider-thumb-color: #854e18;
             --link-color: #0000CD;
             --spacing-large: 40px;
             --spacing-medium: 30px;
@@ -45,6 +45,16 @@
             justify-content: space-between;
             height: 100vh;
             box-sizing: border-box;
+        }
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .title img {
+            height: 40px;
+            margin-right: 10px;
+            transform: translateY(-10px);
         }
         h1 {
             font-weight: bold;
@@ -77,6 +87,7 @@
             opacity: 0.7;
             -webkit-transition: .2s;
             transition: opacity .2s;
+            border-radius: 5px;
         }
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
@@ -211,7 +222,10 @@
 <body>
     <div class="container">
         <div class="info-button" id="infoButton">?</div>
-        <h1>French Press Calculator</h1>
+        <div class="title">
+            <img src="assets/bean_512_transparent.png" alt="Coffee Bean Logo">
+            <h1>French Press Calculator</h1>
+        </div>
         <div class="calculator">
             <div class="slider-container">
                 <label for="strength">
